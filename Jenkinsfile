@@ -50,7 +50,7 @@ try {
                                    clientSecretVariable: 'CLIENT_SECRET',
                                     tenantIdVariable: 'TENANT_ID')])  { 
          ansiColor('xterm') {
-                    sh 'terraform apply'
+                    sh 'terraform apply -auto-approve'
          }
        }
       }

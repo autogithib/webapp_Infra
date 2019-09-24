@@ -7,7 +7,7 @@ variable "cluster_location" {
   type = "string"
 }
 
-variable azure_subscription_id {
+variable subscription_id {
   type = "string"
 }
 
@@ -19,7 +19,7 @@ variable client_secret {
     type = "string"
 }
 
-variable azure_tenant_id {
+variable tenant_id {
   type = "string"
 }
 

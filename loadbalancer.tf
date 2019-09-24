@@ -72,6 +72,6 @@ resource "azurerm_lb_rule" "lb_rule" {
  }
 
 output svc_lb {
-  value = ["${azurerm_lb.nginx.*}"]
+  value = ["${azurerm_lb.nginx.name}","${azurerm_public_ip.lb.ip_address}","${azurerm_public_ip.lb.fqdn}"]
   #"${azurerm_lb.kubelb.ip_address}","${azurerm_public_ip.master.*.fqdn}"]
 }

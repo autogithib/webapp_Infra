@@ -36,12 +36,7 @@ resource "azurerm_virtual_machine" "instances" {
   network_interface_ids = ["${element(azurerm_network_interface.instances.*.id, count.index)}"]
   vm_size               = "Standard_DS1_v2"
   
-      provisioner "remote-exec" {
-    inline = [
-      "ansible-playbook nginx.yml",
-"sleep 20",     ]
-          }
-  
+ 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
   # delete_os_disk_on_termination = true
 

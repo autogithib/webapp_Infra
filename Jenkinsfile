@@ -42,7 +42,7 @@ try {
  if (env.BRANCH_NAME == 'master') {
 
    // Run terraform apply
-  stage('apply') {
+ stage('apply') {
      node {
       withCredentials([azureServicePrincipal(credentialsId: 'azuresp',
                                    subscriptionIdVariable: 'SUBS_ID',

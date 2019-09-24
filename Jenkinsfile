@@ -65,7 +65,7 @@ try {
                                     clientSecretVariable: 'CLIENT_SECRET',
                                     tenantIdVariable: 'TENANT_ID')])  { 
            ansiColor('xterm') {
-                    sh 'terraform show'
+                    sh 'terraform refresh'
            }}
       }
     }

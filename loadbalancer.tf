@@ -58,7 +58,7 @@ resource "azurerm_lb_probe" "lb_probe" {
 resource "azurerm_lb_rule" "lb_rule" {
   resource_group_name            = "${azurerm_resource_group.main.name}"
   location                       = "${azurerm_resource_group.main.location}"
-  loadbalancer_id                = "${azurerm_lb.lb.id}"
+  loadbalancer_id                = "${azurerm_lb.nginx.id}"
   name                           = "lb_rule"
   protocol                       = "Tcp"
   frontend_port                  = 80

@@ -86,3 +86,9 @@ output instances {
 
 
 ########################## invoke remote exec ######################
+
+provisioner "local-exec" {
+    inline = [
+       "ansible -m ping all",
+    ]
+  }

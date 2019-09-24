@@ -36,6 +36,19 @@ resource "azurerm_virtual_machine" "instances" {
   network_interface_ids = ["${element(azurerm_network_interface.instances.*.id, count.index)}"]
   vm_size               = "Standard_DS1_v2"
   
+    connection {
+    type = "ssh"
+    host = mastervmfqdn.southeastasia.cloudapp.azure.com
+    user = var.admin_username
+    port = var.admin_password
+    agent = true
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+       "ansible -m ping all",
+    ]
+  }
  
   # Uncomment this line to delete the OS disk automatically when deleting the VM
   # delete_os_disk_on_termination = true
@@ -79,11 +92,3 @@ output instances {
 }
 
 
-
-########################## invoke remote exec ######################
-
-provisioner "local-exec" {
-    inline = [
-       "ansible -m ping all",
-    ]
-  }

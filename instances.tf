@@ -44,7 +44,7 @@ resource "azurerm_virtual_machine" "instances" {
       port = var.admin_password
     }
     inline = [
-       "sh ansible -m ping all",
+       "touch /etc/ansible/karthick",
     ]
   }
  

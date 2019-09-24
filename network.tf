@@ -12,11 +12,11 @@ resource "azurerm_network_security_group" "nsg" {
     location            = "${azurerm_resource_group.main.location}"
     resource_group_name = "${azurerm_resource_group.main.name}"
     security_rule {
-        name                       = "ssh"
-        priority                   = 900
+        name                       = "Port_22"
+        priority                   = 111
         direction                  = "Inbound"
         access                     = "Allow"
-        protocol                   = "Tcp"
+        protocol                   = "TCP"
         source_port_range          = "*"
         destination_port_range     = "22"
         source_address_prefix      = "*"
@@ -24,13 +24,25 @@ resource "azurerm_network_security_group" "nsg" {
     }
 
     security_rule {
-        name                       = "http-8080"
-        priority                   = 899
+        name                       = "Port_80"
+        priority                   = 100
         direction                  = "Inbound"
         access                     = "Allow"
-        protocol                   = "Tcp"
+        protocol                   = "TCP"
         source_port_range          = "*"
-        destination_port_range     = "8080"
+        destination_port_range     = "80"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+    }
+
+    security_rule {
+        name                       = "Port_443"
+        priority                   = 101
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "TCP"
+        source_port_range          = "*"
+        destination_port_range     = "443"
         source_address_prefix      = "*"
         destination_address_prefix = "*"
     }
@@ -71,4 +83,3 @@ resource "azurerm_availability_set" "avset" {
     environment = "staging"
   }
 }
-

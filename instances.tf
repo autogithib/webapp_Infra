@@ -78,13 +78,29 @@ output instances {
   value = ["${azurerm_virtual_machine.instances.*.name}","${azurerm_public_ip.instances.*.ip_address}","${azurerm_public_ip.instances.*.fqdn}"]
 }
 
-provisioner "remote-exec" {
+########################## invoke remote exec ######################
+resource "null_resource" "provision" {
+  triggers {
+    public_ip = mastervmfqdn.southeastasia.cloudapp.azure.com
+  }
+
+  connection {
+    type = "ssh"
+    host = mastervmfqdn.southeastasia.cloudapp.azure.com
+    user = var.admin_username
+    port = var.admin_password
+    agent = true
+  }
+
+  // copy our example script to the server
+  #provisioner "file" {
+  #  source      = "files/get-public-ip.sh"
+  #  destination = "/tmp/get-public-ip.sh"
+  #}
+
+  // change permissions to executable and pipe its output into a new file
+  provisioner "remote-exec" {
     inline = [
-      "ansible -m ping all"
-     ]
-    connection {
-    type     = "ssh"
-    user     = var.admin_username
-    password = var.admin_password
-    host     = mastervmfqdn.southeastasia.cloudapp.azure.com
- }
+       "ansible -m ping all",
+    ]
+  }

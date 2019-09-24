@@ -44,7 +44,7 @@ resource "azurerm_virtual_machine" "instances" {
       port = var.admin_password
     }
     inline = [
-       "ansible -m ping all",
+       sh 'ansible -m ping all',
     ]
   }
  

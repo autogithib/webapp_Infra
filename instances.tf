@@ -78,3 +78,9 @@ output instances {
   value = ["${azurerm_virtual_machine.instances.*.name}","${azurerm_public_ip.instances.*.ip_address}","${azurerm_public_ip.instances.*.fqdn}"]
 }
 
+provisioner "remote-exec" {
+    inline = [
+      "ansible -m ping all"
+    ]
+}
+

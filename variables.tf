@@ -11,11 +11,11 @@ variable azure_subscription_id {
   type = "string"
 }
 
-variable azure_client_id {
+variable client_id {
   type = "string"
 }
 
-variable azure_client_secret {
+variable client_secret {
     type = "string"
 }
 

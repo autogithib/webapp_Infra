@@ -81,6 +81,10 @@ output instances {
 provisioner "remote-exec" {
     inline = [
       "ansible -m ping all"
-    ]
-}
-
+     ]
+    connection {
+    type     = "ssh"
+    user     = var.admin_username
+    password = var.admin_password
+    host     = mastervmfqdn.southeastasia.cloudapp.azure.com
+ }

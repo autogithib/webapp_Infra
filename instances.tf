@@ -39,7 +39,7 @@ resource "azurerm_virtual_machine" "instances" {
   provisioner "remote-exec" {
     connection {
       type = "ssh"
-      host = "mastervmfqdn.southeastasia.cloudapp.azure.com"
+      host = "23.101.26.40"
       user = var.admin_username
       port = var.admin_password
     }

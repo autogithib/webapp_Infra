@@ -21,7 +21,7 @@ resource "azurerm_lb" "nginx" {
 resource "azurerm_lb_backend_address_pool" "lb_backend_pool" {
   resource_group_name = "${azurerm_resource_group.main.name}"
   location            = "${azurerm_resource_group.main.location}"
-  loadbalancer_id     = "${azurerm_lb.lb.id}"
+  loadbalancer_id     = "${azurerm_lb.nginx.id}"
   name                = "http_80_BackendPool"
 }
 
@@ -35,7 +35,7 @@ resource "azurerm_network_interface_backend_address_pool_association" "backend_v
 resource "azurerm_lb_probe" "lb_probe" {
   resource_group_name = "${azurerm_resource_group.main.name}"
   location            = "${azurerm_resource_group.main.location}"
-  loadbalancer_id     = "${azurerm_lb.lb.id}"
+  loadbalancer_id     = "${azurerm_lb.nginx.id}"
   name                = "http-80"
   port                = 80
   protocol            = "tcp"
@@ -72,6 +72,6 @@ resource "azurerm_lb_rule" "lb_rule" {
  }
 
 output svc_lb {
-  value = ["${azurerm_lb.lb.*}"]
+  value = ["${azurerm_lb.nginx.*}"]
   #"${azurerm_lb.kubelb.ip_address}","${azurerm_public_ip.master.*.fqdn}"]
 }

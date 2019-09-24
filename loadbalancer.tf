@@ -25,12 +25,12 @@ resource "azurerm_lb_backend_address_pool" "lb_backend_pool" {
   name                = "http_80_BackendPool"
 }
 
-resource "azurerm_network_interface_backend_address_pool_association" "backend_vms" {
-  count                   = length(var.instances)
-  network_interface_id    = "${element(azurerm_network_interface.instances.*.id, count.index )}"
-  ip_configuration_name   = "backendpool-ipconfig"
-  backend_address_pool_id = "${azurerm_lb_backend_address_pool.lb_backend_pool.id}"
-}
+#resource "azurerm_network_interface_backend_address_pool_association" "backend_vms" {
+#  count                   = length(var.instances)
+#  network_interface_id    = "${element(azurerm_network_interface.instances.*.id, count.index )}"
+#  ip_configuration_name   = "backendpool-ipconfig"
+#  backend_address_pool_id = "${azurerm_lb_backend_address_pool.lb_backend_pool.id}"
+#}
 
 resource "azurerm_lb_probe" "lb_probe" {
   resource_group_name = "${azurerm_resource_group.main.name}"

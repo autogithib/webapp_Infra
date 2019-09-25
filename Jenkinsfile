@@ -69,11 +69,12 @@ try {
            }}
       }
     }
- stage ('appdeploy')
-   node {
+ stage ('appdeploy'){
+   ansiColor('xterm'){
     sh 'cd /etc/ansible'
      sh 'ansible-playbook nginx.yml'
    }
+ }
  }
   currentBuild.result = 'SUCCESS'
 }

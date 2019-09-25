@@ -69,7 +69,12 @@ try {
            }}
       }
     }
-  }
+ stage ('appdeploy')
+   node {
+    sh 'cd /etc/ansible'
+     sh 'ansible-playbook all -n ping'
+   }
+ }
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {

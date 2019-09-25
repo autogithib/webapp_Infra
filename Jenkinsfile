@@ -72,7 +72,7 @@ try {
  stage ('appdeploy'){
    node{
    ansiColor('xterm'){
-     sh 'ansible-playbook /etc/ansible/nginx.yml'
+     sh 'ansible-playbook /etc/ansible/nginx.yml --extra-vars=index-v1.0.html'
    }
  }
  }

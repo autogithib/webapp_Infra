@@ -26,7 +26,7 @@ try {
 
 
   // Run terraform plan
-  stage('destroy') {
+  stage('plan') {
     node {
     withCredentials([azureServicePrincipal(credentialsId: 'azuresp',
                                     subscriptionIdVariable: 'SUBS_ID',
@@ -34,26 +34,26 @@ try {
                                     clientSecretVariable: 'CLIENT_SECRET',
                                     tenantIdVariable: 'TENANT_ID')]) 
         {
-           sh 'terraform destroy -var azure_client_id=${CLIENT_ID} -var azure_client_secret=${CLIENT_SECRET}'
+           sh 'terraform plan -var azure_client_id=${CLIENT_ID} -var azure_client_secret=${CLIENT_SECRET}'
           }
     }
   }
 
-// if (env.BRANCH_NAME == 'master') {
+ if (env.BRANCH_NAME == 'master') {
 
    // Run terraform apply
- //stage('apply') {
-    // node {
-    //  withCredentials([azureServicePrincipal(credentialsId: 'azuresp',
-    //                               subscriptionIdVariable: 'SUBS_ID',
-    //                                clientIdVariable: 'CLIENT_ID',
-     //                              clientSecretVariable: 'CLIENT_SECRET',
-     //                               tenantIdVariable: 'TENANT_ID')])  { 
-     //    ansiColor('xterm') {
-     //               sh 'terraform apply -auto-approve'
-       //  }
-      // }
-    //  }
+ stage('apply') {
+     node {
+      withCredentials([azureServicePrincipal(credentialsId: 'azuresp',
+                                   subscriptionIdVariable: 'SUBS_ID',
+                                    clientIdVariable: 'CLIENT_ID',
+                                   clientSecretVariable: 'CLIENT_SECRET',
+                                    tenantIdVariable: 'TENANT_ID')])  { 
+         ansiColor('xterm') {
+                    sh 'terraform apply -auto-approve'
+         }
+       }
+      }
     }
 
     // Run terraform show
@@ -69,6 +69,20 @@ try {
            }}
       }
     }
+	
+    // Run terraform destroy
+    stage('destroy') {
+      node {
+         withCredentials([azureServicePrincipal(credentialsId: 'azuresp',
+                                    subscriptionIdVariable: 'SUBS_ID',
+                                    clientIdVariable: 'CLIENT_ID',
+                                    clientSecretVariable: 'CLIENT_SECRET',
+                                    tenantIdVariable: 'TENANT_ID')])  { 
+           ansiColor('xterm') {
+                    sh 'terraform destroy -var azure_client_id=${CLIENT_ID} -var azure_client_secret=${CLIENT_SECRET}'
+           }}
+      }
+    }
  stage ('appdeploy'){
    node{
    ansiColor('xterm'){
@@ -77,7 +91,7 @@ try {
  }
  }
  
- 
+ }
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {

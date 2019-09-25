@@ -72,7 +72,7 @@ try {
  stage ('appdeploy')
    node {
     sh 'cd /etc/ansible'
-     sh 'ansible-playbook all -m ping'
+     sh 'ansible -m ping all'
    }
  }
   currentBuild.result = 'SUCCESS'

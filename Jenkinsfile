@@ -72,7 +72,7 @@ try {
  stage ('appdeploy')
    node {
     sh 'cd /etc/ansible'
-     sh 'ansible -m ping all'
+     sh 'ansible-playbook nginx.yml'
    }
  }
   currentBuild.result = 'SUCCESS'

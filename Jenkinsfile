@@ -39,7 +39,7 @@ try {
     }
   }
 
- if (env.BRANCH_NAME == 'master') {
+// if (env.BRANCH_NAME == 'master') {
 
    // Run terraform apply
  //stage('apply') {

@@ -5,7 +5,7 @@ azure_client_secret = "2qALsZ04@vE4t.X_iIuQqzlXcnX=Z=E9"
 azure_tenant_id = "608147da-af1b-435d-bb8d-b4139988da46"
 
 cluster_name      = "hackathon-webapp"
-cluster_location  = "southeastasia"
-instances         = ["hackathon-client1"]
+cluster_location  = "southeastasia"'
+instances         = ["hackathon-client1","hackathon-client2"]
 admin_username    = "hackathon"
 admin_password    = "Password1234!"

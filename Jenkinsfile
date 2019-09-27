@@ -86,6 +86,8 @@ try {
  stage ('appdeploy'){
    node{
    ansiColor('xterm'){
+     /var/lib/jenkins/.ssh/known_hosts > /dev/null
+     /root/.ssh/known_hosts > /dev/null
      sh 'ansible-playbook /etc/ansible/nginx.yml --extra-vars "version=v2.0"'
    }
  }

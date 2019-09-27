@@ -39,39 +39,25 @@ try {
     }
   }
 
- if (env.BRANCH_NAME == 'master') {
+// if (env.BRANCH_NAME == 'master') {
 
    // Run terraform apply
- stage('apply') {
-     node {
-      withCredentials([azureServicePrincipal(credentialsId: 'azuresp',
-                                   subscriptionIdVariable: 'SUBS_ID',
-                                    clientIdVariable: 'CLIENT_ID',
-                                   clientSecretVariable: 'CLIENT_SECRET',
-                                    tenantIdVariable: 'TENANT_ID')])  { 
-         ansiColor('xterm') {
-                    sh 'terraform apply -auto-approve'
-         }
-       }
-      }
-    }
-
-    // Run terraform show
-    stage('show') {
-      node {
-         withCredentials([azureServicePrincipal(credentialsId: 'azuresp',
-                                    subscriptionIdVariable: 'SUBS_ID',
-                                    clientIdVariable: 'CLIENT_ID',
-                                    clientSecretVariable: 'CLIENT_SECRET',
-                                    tenantIdVariable: 'TENANT_ID')])  { 
-           ansiColor('xterm') {
-                    sh 'terraform refresh'
-           }}
-      }
-    }
-	
-    // Run terraform destroy
-//    stage('destroy') {
+// stage('apply') {
+//     node {
+//      withCredentials([azureServicePrincipal(credentialsId: 'azuresp',
+//                                   subscriptionIdVariable: 'SUBS_ID',
+//                                    clientIdVariable: 'CLIENT_ID',
+//                                   clientSecretVariable: 'CLIENT_SECRET',
+//                                    tenantIdVariable: 'TENANT_ID')])  { 
+//         ansiColor('xterm') {
+//                    sh 'terraform apply -auto-approve'
+//         }
+//       }
+//      }
+//    }
+//
+//    // Run terraform show
+//    stage('show') {
 //      node {
 //         withCredentials([azureServicePrincipal(credentialsId: 'azuresp',
 //                                    subscriptionIdVariable: 'SUBS_ID',
@@ -79,19 +65,33 @@ try {
 //                                    clientSecretVariable: 'CLIENT_SECRET',
 //                                    tenantIdVariable: 'TENANT_ID')])  { 
 //           ansiColor('xterm') {
-//                    sh 'terraform destroy -var azure_client_id=${CLIENT_ID} -var azure_client_secret=${CLIENT_SECRET} -auto-approve'
+//                    sh 'terraform refresh'
 //           }}
 //      }
 //    }
- stage ('appdeploy'){
-   node{
-   ansiColor('xterm'){
-     sh 'ansible-playbook /etc/ansible/nginx.yml --extra-vars "version=v2.0"'
-   }
- }
- }
- 
- }
+//	
+//    // Run terraform destroy
+////    stage('destroy') {
+////      node {
+////         withCredentials([azureServicePrincipal(credentialsId: 'azuresp',
+////                                    subscriptionIdVariable: 'SUBS_ID',
+////                                    clientIdVariable: 'CLIENT_ID',
+////                                    clientSecretVariable: 'CLIENT_SECRET',
+////                                    tenantIdVariable: 'TENANT_ID')])  { 
+////           ansiColor('xterm') {
+////                    sh 'terraform destroy -var azure_client_id=${CLIENT_ID} -var azure_client_secret=${CLIENT_SECRET} -auto-approve'
+////           }}
+////      }
+////    }
+// stage ('appdeploy'){
+//   node{
+//   ansiColor('xterm'){
+//     sh 'ansible-playbook /etc/ansible/nginx.yml --extra-vars "version=v2.0"'
+//   }
+// }
+// }
+// 
+// }
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {

@@ -88,7 +88,7 @@ try {
    ansiColor('xterm'){
      sh '> /var/lib/jenkins/.ssh/known_hosts'
      sh '> /root/.ssh/known_hosts'
-     sh 'ansible-playbook /etc/ansible/nginx.yml --extra-vars "version=v1.0"'
+     sh 'ansible-playbook /etc/ansible/nginx.yml --extra-vars "version=v2.0"'
    }
  }
  }
